@@ -4,7 +4,8 @@
   "description": "A first look on what a gRPC API looks like with NodeJS",
   "main": "index.js",
   "scripts": {
-    "start": "node server.mjs"
+    "start": "node server.mjs",
+    "start:client": "node client.mjs"
   },
   "keywords": [],
   "author": "aurelien.bouteiller@niji.fr",
