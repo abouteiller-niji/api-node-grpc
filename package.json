@@ -4,8 +4,8 @@
   "description": "A first look on what a gRPC API looks like with NodeJS",
   "main": "index.js",
   "scripts": {
-    "start": "node server.mjs",
-    "start:client": "node client.mjs"
+    "start": "ts-node server.ts",
+    "start:client": "ts-node client.ts"
   },
   "keywords": [],
   "author": "aurelien.bouteiller@niji.fr",
@@ -13,5 +13,9 @@
   "dependencies": {
     "@grpc/grpc-js": "1.8.1",
     "@grpc/proto-loader": "0.7.4"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.1",
+    "typescript": "4.9.4"
   }
 }
