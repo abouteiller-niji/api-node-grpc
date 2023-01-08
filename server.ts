@@ -4,6 +4,8 @@ import {
   Server,
   ServerCredentials,
 } from "@grpc/grpc-js";
+import { ProtoGrpcType } from "./proto/hello_world";
+import { GreeterServiceHandlers } from "./proto/GreeterService";
 
 const PROTO_PATH = "./hello_world.proto";
 const packageDefinition = loadSync(PROTO_PATH, {
@@ -13,9 +15,11 @@ const packageDefinition = loadSync(PROTO_PATH, {
   defaults: true,
   oneofs: true,
 });
-const hello_proto = loadPackageDefinition(packageDefinition);
+const hello_proto = loadPackageDefinition(
+  packageDefinition
+) as unknown as ProtoGrpcType;
 
-const sayHello = (call, callback) => {
+const sayHello: GreeterServiceHandlers["SayHello"] = (call, callback) => {
   const { name } = call.request;
   callback(null, { message: `Bonjour ${name}` });
 };

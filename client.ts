@@ -1,5 +1,6 @@
 import { loadSync } from "@grpc/proto-loader";
 import { loadPackageDefinition, credentials } from "@grpc/grpc-js";
+import { ProtoGrpcType } from "./proto/hello_world";
 
 const PROTO_PATH = "./hello_world.proto";
 const packageDefinition = loadSync(PROTO_PATH, {
@@ -9,7 +10,9 @@ const packageDefinition = loadSync(PROTO_PATH, {
   defaults: true,
   oneofs: true,
 });
-const hello_proto = loadPackageDefinition(packageDefinition);
+const hello_proto = loadPackageDefinition(
+  packageDefinition
+) as unknown as ProtoGrpcType;
 
 function startClient() {
   const PORT = 3000;
@@ -22,12 +25,16 @@ function startClient() {
   deadLineForTimeout.setSeconds(deadLineForTimeout.getSeconds() + 5);
   service.waitForReady(deadLineForTimeout, (error) => {
     if (error) {
-      console.error(error)
-      return
+      console.error(error);
+      return;
     }
     service.SayHello({ name: "Lecteur" }, (error, result) => {
       if (error) {
         console.error("An error has occurred", error);
+        return;
+      }
+      if (!result) {
+        console.error("Didn't receive a result and without error");
         return;
       }
       const { message } = result;
