@@ -1,0 +1,16 @@
+{
+  "name": "api-grpc",
+  "version": "1.0.0",
+  "description": "A first look on what a gRPC API looks like with NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "keywords": [],
+  "author": "aurelien.bouteiller@niji.fr",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "1.8.1",
+    "@grpc/proto-loader": "0.7.4"
+  }
+}
