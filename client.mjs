@@ -18,13 +18,21 @@ function startClient() {
     host,
     credentials.createInsecure()
   );
-  service.SayHello({ name: "Lecteur" }, (error, result) => {
+  const deadLineForTimeout = new Date();
+  deadLineForTimeout.setSeconds(deadLineForTimeout.getSeconds() + 5);
+  service.waitForReady(deadLineForTimeout, (error) => {
     if (error) {
-      console.error("An error has occurred", error);
-      return;
+      console.error(error)
+      return
     }
-    const { message } = result;
-    console.log(message);
+    service.SayHello({ name: "Lecteur" }, (error, result) => {
+      if (error) {
+        console.error("An error has occurred", error);
+        return;
+      }
+      const { message } = result;
+      console.log(message);
+    });
   });
 }
 
